@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.border.main.mapper.UserMapper">
+	<!-- USER SELECT -->
+	<!-- 가입자 수 -->
+	<select id="countUser" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BORDER_USER
+	</select>
+	
+	<!-- 신규 가입 시 idx의 최댓값 + 1 -->
+	<select id="maxIdx" resultType="java.lang.Integer">
+		SELECT MAX(IDX)
+		FROM BORDER_USER
+	</select>
+	
+	<!-- 로그인 시 아이디 일치 여부 -->
+	<select id="findUserid" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BORDER_USER
+		WHERE USERID = #{userid}
+	</select>
+	
+	<!-- 로그인 시 비밀번호 일치 여부 -->
+	<select id="findPassword" parameterType="egovframework.border.main.vo.LoginVO" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BORDER_USER
+		WHERE USERID = #{userid} AND PASSWORD = #{password}
+	</select>
+	<!-- USER SELECT -->
+	
+	<!-- 회원가입 -->
+	<insert id="joinUser" parameterType="egovframework.border.main.vo.UserVO">
+		INSERT INTO BORDER_USER (idx, userid, password, name, age, address)
+		VALUES(#{idx}, #{userid}, #{password}, #{name}, #{age}, #{address})
+	</insert>
+	
+	
+</mapper>

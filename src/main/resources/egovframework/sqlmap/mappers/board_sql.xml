@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.border.main.mapper.BoardMapper">
+
+	<resultMap id="BoardResultMap" type="egovframework.border.main.vo.BoardVO">
+		<result property="idx" column="IDX" />
+		<result property="userid" column="USERID" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="reg_date" column="REG_DATE" />
+	</resultMap>
+
+	<select id="countBoard" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BORDER_BOARD
+	</select>
+	
+	<select id="maxIdx" resultType="java.lang.Integer">
+		SELECT COALESCE(MAX(IDX), 0)
+		FROM BORDER_BOARD
+	</select>
+	
+	<select id="boardList" resultMap="BoardResultMap">
+		SELECT *
+		FROM BORDER_BOARD
+	</select>
+	
+	<select id="getBoard" resultMap="BoardResultMap" parameterType="java.lang.Integer">
+		SELECT *
+		FROM BORDER_BOARD
+		WHERE IDX = #{idx}
+	</select>
+	
+	<insert id="insertBoard" parameterType="egovframework.border.main.vo.BoardVO">
+		INSERT INTO BORDER_BOARD (idx, userid, title, content, s_file, o_file, reg_date)
+		VALUES(#{idx}, #{userid}, #{title}, #{content}, #{s_file}, #{o_file}, NOW())
+	</insert>
+</mapper>
