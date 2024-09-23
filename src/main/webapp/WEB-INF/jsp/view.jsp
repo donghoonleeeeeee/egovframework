@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table>
+<table border=1>
 	<tr>
 		<td colspan=2>Board</td>
 	</tr>
@@ -29,7 +28,7 @@
 	
 	<tr>
 		<td colspan=2>
-			<input type="button" value="수정">
+			<a href="/Test_Border/modify.do?idx=${board.idx}"><input type="button" value="수정"></a>
 			<input type="button" value="삭제">
 		</td>
 	</tr>

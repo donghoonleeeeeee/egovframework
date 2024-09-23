@@ -48,9 +48,22 @@ public class boardController
 	}
 	
 	@GetMapping("/view.do")
-	public void viewPage(@RequestParam int idx, Model model) throws Exception
+	public String viewPage(@RequestParam int idx, Model model) throws Exception
+	{	
+		model.addAttribute("board", boardService.getBoard(idx));
+		return "view";
+	}
+	
+	@GetMapping("/modify.do")
+	public String modifyPage(@RequestParam int idx, Model model) throws Exception
+	{
+		model.addAttribute("board", boardService.getBoard(idx));
+		return "modify";
+	}
+	
+	@PostMapping("/modify_proc.do")
+	public void modify_proc(@ModelAttribute BoardVO baordVO) throws Exception
 	{
 		
-		model.addAttribute("board", boardService.getBoard(idx));
 	}
 }
